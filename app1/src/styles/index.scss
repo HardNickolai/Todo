@@ -1,0 +1,69 @@
+.block-header-name-user {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-login {
+  margin: 0;
+  padding: 10px;
+}
+
+.container-block-tasks {
+  width: 900px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.block-task {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-block-task {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-block-task-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.left-block-task {
+  display: flex;
+  align-items: center;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.blockAddNewTask {
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconAdd:hover {
+  cursor: pointer;
+}
+
+.iconAdd {
+    width: 100px;
+    height: 100px;
+}
