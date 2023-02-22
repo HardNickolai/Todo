@@ -28,9 +28,14 @@ const Index = () => {
         textTask: textTask,
       };
 
-      await apiRequestTasks("POST", task);
-      setTextTask("");
-      dispatch(setStateTask(!stateTask));
+      const res = await apiRequestTasks("POST", task);
+
+      if (res.status === 200) {
+        setTextTask("");
+        dispatch(setStateTask(!stateTask));
+      } else {
+        throw new Error();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -43,10 +48,16 @@ const Index = () => {
 
   useEffect(() => {
     const data = async () => {
-      const res = await loadData();
-      if (res) {
-        dispatch(setDataTasks(res));
-        setTasks(res);
+      try {
+        const res = await loadData();
+        if (res) {
+          dispatch(setDataTasks(res));
+          setTasks(res);
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
     data();

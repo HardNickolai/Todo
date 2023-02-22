@@ -34,17 +34,14 @@ const Registr = () => {
   const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
 
   const checkLogin = async (text: string) => {
+    setStateNatifeeLogin(false);
     setTextLogin(text);
     const data: Array<IDataUser> = await apiRequestUsers("GET");
     if (!data) {
       setStateNatifeeLogin(true);
       return false;
     } else {
-      data.map((item) =>
-        item.login === text
-          ? setStateNatifeeLogin(true)
-          : setStateNatifeeLogin(false)
-      );
+      data.map((item) => item.login === text && setStateNatifeeLogin(true));
     }
   };
 
@@ -60,13 +57,17 @@ const Registr = () => {
 
   const toRegistr = async () => {
     if (!stateNatifeeLogin && stateNatifeePassword) {
-      const res: Array<IDataUser> = await apiRequestUsers("POST", {
-        login: textLogin,
-        password: textPasswordInput2,
-      });
-      localStorage.setItem("userLogin", textLogin);
-      navigate("/index");
-      return res;
+      try {
+        const res: Array<IDataUser> = await apiRequestUsers("POST", {
+          login: textLogin,
+          password: textPasswordInput2,
+        });
+        localStorage.setItem("userLogin", textLogin);
+        navigate("/index");
+        return res;
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 

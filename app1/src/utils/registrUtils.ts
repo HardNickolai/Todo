@@ -3,7 +3,3 @@ export const checkLength = (text: string) => {
     return true;
   } else return false;
 };
-
-export const createDataUser = () => {
-    
-}

@@ -43,20 +43,25 @@ const Login = () => {
   };
 
   const login = async () => {
-    const dataUsers: Array<IDataUser> = await apiRequestUsers("GET");
-    if (!dataUsers) {
-      onError("server");
-      return false;
-    } else if (dataUsers.length === 0) {
-      return onError("input");
-    } else {
-      dataUsers.map((item) => {
-        return item.login === textLogin && item.password === textPassword
-          ? move()
-          : onError("input");
-      });
+    try {
+      const dataUsers: Array<IDataUser> = await apiRequestUsers("GET");
+      if (!dataUsers) {
+        onError("server");
+        throw new Error();
+      } else if (dataUsers.length === 0) {
+        onError("input");
+        throw new Error();
+      } else {
+        dataUsers.map((item) => {
+          return item.login === textLogin && item.password === textPassword
+            ? move()
+            : onError("input");
+        });
+      }
+      return dataUsers;
+    } catch (err) {
+      console.log(err);
     }
-    return dataUsers;
   };
 
   return (
